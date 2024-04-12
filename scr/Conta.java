@@ -7,12 +7,12 @@ public class Conta {
     private int nOperacoes;
     private Operacao[] operacoes;
 
-    private int totalContas;
+    private static int totalContas;
 
     public Conta() {
         this.nOperacoes = 0;
         this.operacoes = new Operacao[1000];
-        this.operacoes[nOperacoes] = new Operacao();
+        Conta.totalContas++;
     }
 
     void imprimir() {
@@ -26,18 +26,9 @@ public class Conta {
     public boolean sacar(double valor) {
         if (this.saldo - valor > 0 && valor <= this.limite) {
 
-            if (this.nOperacoes != 0) {
-                this.operacoes[this.nOperacoes] = new Operacao();
-                this.operacoes[this.nOperacoes].Operar('s', valor);
-                this.operacoes[this.nOperacoes].setTotalOperacoes(this.operacoes[this.nOperacoes - 1].getTotalOperacoes() + 1);
-                this.nOperacoes++;
-            } else {
-                this.operacoes[this.nOperacoes] = new Operacao();
-                this.operacoes[this.nOperacoes].Operar('s', valor);
-                this.operacoes[this.nOperacoes].setTotalOperacoes(1);
-                this.nOperacoes++;
-            }
-
+            this.operacoes[this.nOperacoes] = new Operacao();
+            this.operacoes[this.nOperacoes].Operar('s', valor);
+            this.nOperacoes++;
             this.saldo -= valor;
             return true;
         } else {
@@ -47,19 +38,9 @@ public class Conta {
 
     public boolean depositar(double valor) {
         if (valor > 0) {
-
-            if (this.nOperacoes != 0) {
-                this.operacoes[this.nOperacoes] = new Operacao();
-                this.operacoes[this.nOperacoes].Operar('d', valor);
-                this.operacoes[this.nOperacoes].setTotalOperacoes(this.operacoes[this.nOperacoes - 1].getTotalOperacoes() + 1);
-                this.nOperacoes++;
-            } else {
-                this.operacoes[this.nOperacoes] = new Operacao();
-                this.operacoes[this.nOperacoes].Operar('d', valor);
-                this.operacoes[this.nOperacoes].setTotalOperacoes(1);
-                this.nOperacoes++;
-            }
-
+            this.operacoes[this.nOperacoes] = new Operacao();
+            this.operacoes[this.nOperacoes].Operar('d', valor);
+            this.nOperacoes++;
             this.saldo += valor;
             return true;
         } else {
@@ -108,10 +89,6 @@ public class Conta {
         this.operacoes = new Operacao[valor];
     }
 
-    public void setTotalContas(int valor) {
-        this.totalContas = valor;
-    }
-
     public String getDono() {
         return this.dono;
     }
@@ -144,7 +121,7 @@ public class Conta {
         return this.operacoes[i];
     }
 
-    public int getTotalContas() {
-        return this.totalContas;
+    public static int getTotalContas() {
+        return Conta.totalContas;
     }
 }
