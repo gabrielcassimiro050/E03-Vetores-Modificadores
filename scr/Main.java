@@ -1,17 +1,14 @@
 import java.util.Scanner;
 
-import javax.sound.sampled.SourceDataLine;
-
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 public class Main {
 
-    public static Conta[] inicializarContas(int n) {
-        Conta[] aux = new Conta[n];
-        for (int i = 0; i < n; ++i) {
+    public static Conta[] inicializarContas(int nContas) {
+        Conta[] aux = new Conta[nContas];
+        for (int i = 0; i <  nContas; ++i) {
             aux[i] = new Conta();
-            aux[i].setTotalContas(n);
         }
         return aux;
     }
@@ -33,12 +30,6 @@ public class Main {
         contas[0].sacar(200);
         contas[1].sacar(200);
 
-        int t  = 0;
-        for (Conta c : contas) {
-            if (c.getNOperacoes() != 0) {
-                t+=c.getOperacoes()[c.getNOperacoes() - 1].getTotalOperacoes();
-            }
-        }
-        System.out.println("Total de Operações: "+t);
+        System.out.println("Total de Operações: "+Operacao.getTotalOperacoes());
     }
 }
