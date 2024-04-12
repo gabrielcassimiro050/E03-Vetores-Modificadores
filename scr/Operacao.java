@@ -20,7 +20,7 @@ public class Operacao {
     /* Valor da operação */
     private double valor;
 
-    private int totalOperacoes;
+    private static int totalOperacoes;
 
     /**
      * Construtor. Inicializa uma nova instância da classe Operacao onde a data da operação é exatamente a data
@@ -34,8 +34,10 @@ public class Operacao {
      * @param tipo Tipo da operação, podendo ser 'd' ou 's'
      * @param valor Valor da operação
      */
+
     public Operacao(){
         this.tipo = ' ';
+        Operacao.totalOperacoes++;
     }
     public void Operar(char tipo, double valor){
         this.tipo = tipo;
@@ -53,11 +55,7 @@ public class Operacao {
         return this.data;
     }
 
-    public int getTotalOperacoes(){
-        return this.totalOperacoes;
-    }
-
-    public void setTotalOperacoes(int valor){
-        this.totalOperacoes = valor;
+    public static int getTotalOperacoes(){
+        return Operacao.totalOperacoes;
     }
 }
